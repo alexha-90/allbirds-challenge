@@ -16,22 +16,25 @@ function LoginPage() {
     });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fieldValue = e.target.value;
         // @ts-ignore
         setFormValues({
             ...formValues,
-            [e.target.id]: [e.target.value]
+            [e.target.id]: fieldValue
         })
     };
+
+    console.log('Current field state:', formValues)
 
     return (
         <div className="login-page">
             <h1>CREATE AN ACCOUNT</h1>
             <p>
-                Registering makes checkout fast and easy and saves your order information in your account.
+                Evaluator - Check Developer's console to see field changes
             </p>
             <form>
                 {loginInputFields.map(field => (
-                    <div className="form-field" id={field.name + "-input"}>
+                    <div className="form-field" id={field.name + "-input"} key={field.name}>
                         <label htmlFor={field.name}>
                             {field.label.toUpperCase()}
                         </label>
@@ -46,7 +49,9 @@ function LoginPage() {
                         />
                     </div>
                 ))}
-                {/*<input type="submit" value="REGISTER" />*/}
+                <div className="submit-button">
+                    <input type="submit" value="REGISTER" />
+                </div>
             </form>
         </div>
     );

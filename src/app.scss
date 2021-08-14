@@ -15,6 +15,8 @@ code {
 }
 
 .app {
+  position: relative;
+  min-height: 100vh;
   .app-container {
     width: 60%;
     margin: $spacing-xl auto;

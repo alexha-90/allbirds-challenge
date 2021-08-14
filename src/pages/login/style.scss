@@ -30,6 +30,14 @@
     }
   }
 
-
-
+  .submit-button {
+    width: 100%;
+    margin-top: $spacing-xl;
+    input {
+      color: $white;
+      background-color: $black;
+      height: $size-xxl;
+      width: inherit;
+    }
+  }
 }
