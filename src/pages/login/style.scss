@@ -1,3 +1,17 @@
-.App {
-  background-color: green;
+@import "../../variables";
+
+.login-page {
+  // 100% - header - footer - margins
+  //min-height: calc(100% - #{$size-lg} - #{$size-lg} - #{$spacing-xl} - #{$spacing-xl} - #{$spacing-xl})
+  //min-height: calc(100vh - 3rem - 3rem  - 2rem - 2rem - 2rem);
+
+  background-color: $cream;
+  padding: $spacing-xl;
+  h1 {
+    font-weight: $bold;
+  }
+  p {
+    font-weight: $light;
+  }
+
 }

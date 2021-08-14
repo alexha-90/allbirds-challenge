@@ -1,16 +1,19 @@
 import React from 'react';
-import Header from "./components/header"
-import Footer from "./components/footer"
+import Header from "./components/header";
+import Footer from "./components/footer";
 import LoginPage from "./pages/login";
+import './app.scss';
 //====================================================================================================================//
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
         <Header />
-        {/* START - Would implement page routing logic here */}
-        <LoginPage />
-        {/* END - Would implement page routing logic here */}
+        <div className="app-container">
+            {/* START - Would implement page routing logic here */}
+            <LoginPage />
+            {/* END - Would implement page routing logic here */}
+        </div>
         <Footer />
     </div>
   );

@@ -1,14 +1,19 @@
 // spacing
 $spacing-md: 1rem;
+$spacing-xl: 2rem;
 
 
 // sizing
-$size-md: 3rem;
+$size-md: 1rem;
+$size-sm: $size-md * 0.5;
+$size-lg: $size-md * 4;
 
 // colors
 
 $white: #fff;
 $dark-green: #212a2f;
+$cream: #f1ebe7;
 
 // font
+$light: 300;
 $bold: 700;
