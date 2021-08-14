@@ -1,14 +1,45 @@
+@import "../../variables";
+
 .header {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 3rem;
-  background-color: white;
-  img {
-    position: relative;
-    margin: 0 auto;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 2.5rem;
+  background-color: $white;
+  div {
+    display: flex;
+    flex-direction: row;
   }
+  button {
+    background-color: $white;
+    border: none;
+    padding: 0 2rem;
+    span {
+      cursor: pointer;
+      font-weight: $bold;
+    }
+    span:hover {
+      text-decoration: underline;
+    }
+  }
+  .middle-content {
+    width: 40%;
+    img {
+      position: relative;
+      margin: 0 auto;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 2.5rem;
+    }
+  }
+  .left-content {
+    direction: ltr;
+    flex: 1;
+
+  }
+  .right-content {
+    direction: rtl;
+    flex: 1;
+  }
+
 }
