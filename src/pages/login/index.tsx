@@ -18,11 +18,18 @@ function LoginPage() {
         [INPUT_FIELDS.PASSWORD_CONFIRMATION]: ""
     });
 
+    const [hasValidationError, setHasValidationErrors] = useState({
+        [INPUT_FIELDS.FIRST_NAME]: false,
+        [INPUT_FIELDS.LAST_NAME]: false,
+        [INPUT_FIELDS.PHONE_NUMBER]: false,
+        [INPUT_FIELDS.EMAIL_ADDRESS]: false,
+        [INPUT_FIELDS.PASSWORD]: false,
+        [INPUT_FIELDS.PASSWORD_CONFIRMATION]: false
+    });
+
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = e.target.id;
         let newFieldValue = e.target.value;
-
-
         if (fieldName === INPUT_FIELDS.PHONE_NUMBER) {
             const currPhoneValue = formValues[INPUT_FIELDS.PHONE_NUMBER];
             // @ts-ignore
@@ -38,26 +45,39 @@ function LoginPage() {
     const onSubmitLoginForm = async (e: any) => {
         e.preventDefault();
         setIsSubmitting(true);
-        await submitLoginData(formValues);
+        const res: any = await submitLoginData(formValues);
+        if (res.status === 400) {
+            setHasValidationErrors({
+                [INPUT_FIELDS.FIRST_NAME]: res.message.includes(INPUT_FIELDS.FIRST_NAME),
+                [INPUT_FIELDS.LAST_NAME]: res.message.includes(INPUT_FIELDS.LAST_NAME),
+                [INPUT_FIELDS.PHONE_NUMBER]: res.message.includes(INPUT_FIELDS.PHONE_NUMBER),
+                [INPUT_FIELDS.EMAIL_ADDRESS]: res.message.includes(INPUT_FIELDS.EMAIL_ADDRESS),
+                [INPUT_FIELDS.PASSWORD]: res.message.includes(INPUT_FIELDS.PASSWORD),
+                [INPUT_FIELDS.PASSWORD_CONFIRMATION]: res.message.includes(INPUT_FIELDS.PASSWORD_CONFIRMATION)
+            })
+        }
         setTimeout(() => {
             setIsSubmitting(false);
         }, 1000);
     };
 
-
-    console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);
+    // console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);
 
     return (
         <div className="login-page">
             <h1>CREATE AN ACCOUNT</h1>
             <p className="evaluator-text">
-                Evaluator - Check Developer's console to see field changes. If fields inputs are not alphanumeric,
-                you will see a registration error (simulating backend validation error).
+                Evaluator - Check Developer's console to see field changes. If fields inputs are empty or not alphanumeric,
+                you will see a registration error (simulating backend validation error). Also if phone number or email are not formatted
+                correctly or passwords mismatched.
             </p>
             <form>
                 {loginInputFields.map(field => (
                     <div className="form-field" id={field.name + "-input"} key={field.name}>
-                        <label htmlFor={field.name}>
+                        <label
+                            style={{ color: hasValidationError[field.name] ? "red" : "black" }}
+                            htmlFor={field.name}
+                        >
                             {field.label.toUpperCase() + (field.required ? " *" : "")}
                         </label>
                         <input
