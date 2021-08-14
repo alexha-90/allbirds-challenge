@@ -5,7 +5,7 @@ import './style.scss';
 
 function Header() {
     return (
-        <div className="App">
+        <div className="header">
             <img src={AllbirdsLogo} alt="logo" />
         </div>
     );
