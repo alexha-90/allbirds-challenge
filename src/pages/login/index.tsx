@@ -62,7 +62,9 @@ function LoginPage(props: Props) {
         setTimeout(() => {
             setIsSubmitting(false);
         }, 1000);
-        props.setIsAuthenticated(true);
+        if (res.status === 200) {
+            props.setIsAuthenticated(true);
+        }
     };
 
     console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);

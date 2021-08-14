@@ -48,7 +48,7 @@ function mockBackendValidation(inputData: any) {
 export async function submitLoginData(data: any) {
     const mockRes = mockBackendValidation(data);
     try {
-        if (mockBackendValidation.length === 0) {
+        if (mockRes.length === 0) {
             return {
                 "status": 200,
                 "data": {},

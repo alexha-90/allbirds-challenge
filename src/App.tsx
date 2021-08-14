@@ -12,8 +12,10 @@ function App() {
         <div className="app">
             <Header />
             <div className="app-container">
-                {!isAuthenticated && <LoginPage setIsAuthenticated={setIsAuthenticated} />}
-                {isAuthenticated && <LoginSuccessPage isAuthenticated={isAuthenticated}/> }
+                {isAuthenticated
+                    ? <LoginSuccessPage />
+                    : <LoginPage setIsAuthenticated={setIsAuthenticated} />
+                }
             </div>
             <Footer />
         </div>
