@@ -6,8 +6,11 @@ import { submitLoginData } from "../../api/submitLogin";
 import './style.scss';
 //====================================================================================================================//
 
+interface Props {
+    setIsAuthenticated: any;
+}
 
-function LoginPage() {
+function LoginPage(props: Props) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formValues, setFormValues] = useState({
         [INPUT_FIELDS.FIRST_NAME]: "",
@@ -59,9 +62,10 @@ function LoginPage() {
         setTimeout(() => {
             setIsSubmitting(false);
         }, 1000);
+        props.setIsAuthenticated(true);
     };
 
-    // console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);
+    console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);
 
     return (
         <div className="login-page">
