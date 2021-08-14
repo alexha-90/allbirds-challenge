@@ -12,8 +12,18 @@
   h1 {
     font-weight: $bold;
   }
-  p {
+  .evaluator-text {
     font-weight: $light;
+  }
+  .legal-text {
+    font-size: $font-sm;
+    a {
+      color: $black;
+    }
+  }
+  .required-text {
+    margin-bottom: 0;
+    font-weight: $bold;
   }
 
   .form-field {
@@ -34,6 +44,7 @@
     width: 100%;
     margin-top: $spacing-xl;
     input {
+      cursor: pointer;
       color: $white;
       background-color: $black;
       height: $size-xxl;
