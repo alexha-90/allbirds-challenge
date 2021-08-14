@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { loginInputFields, INPUT_FIELDS } from "./fields";
 import { phoneNumberFormatter } from "./util";
 import { DEFAULT_MAX_FIELD_LENGTH } from "../../constants";
+import { submitLoginData } from "../../api/submitLogin";
 import './style.scss';
 //====================================================================================================================//
 
 
 function LoginPage() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formValues, setFormValues] = useState({
         [INPUT_FIELDS.FIRST_NAME]: "",
         [INPUT_FIELDS.LAST_NAME]: "",
@@ -26,7 +28,6 @@ function LoginPage() {
             // @ts-ignore
             newFieldValue = phoneNumberFormatter(currPhoneValue, newFieldValue);
         }
-        // console.log('fieldValue', newFieldValue)
         // @ts-ignore
         setFormValues({
             ...formValues,
@@ -34,18 +35,24 @@ function LoginPage() {
         })
     };
 
-    const onSubmitLoginForm = (e: any) => {
+    const onSubmitLoginForm = async (e: any) => {
         e.preventDefault();
+        setIsSubmitting(true);
+        await submitLoginData(formValues);
+        setTimeout(() => {
+            setIsSubmitting(false);
+        }, 1000);
     };
 
 
-    // console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);
+    console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);
 
     return (
         <div className="login-page">
             <h1>CREATE AN ACCOUNT</h1>
             <p className="evaluator-text">
-                Evaluator - Check Developer's console to see field changes
+                Evaluator - Check Developer's console to see field changes. If fields inputs are not alphanumeric,
+                you will see a registration error (simulating backend validation error).
             </p>
             <form>
                 {loginInputFields.map(field => (
@@ -68,7 +75,7 @@ function LoginPage() {
                 <div className="submit-button">
                     <input
                         type="submit"
-                        value="REGISTER"
+                        value={isSubmitting ? "SUBMITTING..." : "REGISTER"}
                         onClick={onSubmitLoginForm}
                     />
                 </div>

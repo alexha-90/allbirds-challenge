@@ -1,4 +1,6 @@
 export function phoneNumberFormatter(currPhoneValue: string, nextPhoneNumberValue: string) {
+    if (!nextPhoneNumberValue) return "";
+
     let validatedNextInput = nextPhoneNumberValue.replace(/[^\d]/g, '');
 
     if (!currPhoneValue || nextPhoneNumberValue.length > currPhoneValue.length) {
@@ -15,5 +17,4 @@ export function phoneNumberFormatter(currPhoneValue: string, nextPhoneNumberValu
         // after parentheses and incomplete dash
         return `(${validatedNextInput.slice(0, 3)}) ${validatedNextInput.slice(3, 6)}-${validatedNextInput.slice(6, 10)}`;
     }
-
 }
