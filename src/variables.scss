@@ -1,12 +1,17 @@
+$base-unit: 1rem;
+
 // spacing
-$spacing-md: 1rem;
-$spacing-xl: 2rem;
+$spacing-xsm: $base-unit * 0.25;
+$spacing-sm: $base-unit * 0.5;
+$spacing-md: $base-unit;
+$spacing-xl: $base-unit * 2;
 
 
 // sizing
-$size-md: 1rem;
-$size-sm: $size-md * 0.5;
-$size-lg: $size-md * 4;
+$size-sm: $base-unit * 0.5;
+$size-md: $base-unit;
+$size-xl: $base-unit * 2;
+$size-xxl: $base-unit * 4;
 
 // colors
 

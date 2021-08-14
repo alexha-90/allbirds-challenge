@@ -2,9 +2,11 @@
 
 .login-page {
   // 100% - header - footer - margins
-  //min-height: calc(100% - #{$size-lg} - #{$size-lg} - #{$spacing-xl} - #{$spacing-xl} - #{$spacing-xl})
+  //min-height: calc(100% - #{$size-xxl} - #{$size-xxl} - #{$spacing-xl} - #{$spacing-xl} - #{$spacing-xl})
   //min-height: calc(100vh - 3rem - 3rem  - 2rem - 2rem - 2rem);
 
+  margin: 0 auto;
+  max-width: 400px;
   background-color: $cream;
   padding: $spacing-xl;
   h1 {
@@ -12,6 +14,20 @@
   }
   p {
     font-weight: $light;
+  }
+
+  label {
+    display: block;
+    //background-color: green;
+    //margin-bottom: $spacing-md;
+  }
+
+  input {
+    margin-top: $spacing-xsm;
+    display: block;
+    width: 100%;
+    height: $size-xl;
+    padding: $spacing-xsm;
   }
 
 }
