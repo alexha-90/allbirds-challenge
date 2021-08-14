@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { loginInputFields, INPUT_FIELDS } from "./fields";
+import { phoneNumberFormatter } from "./util";
 import { DEFAULT_MAX_FIELD_LENGTH } from "../../constants";
 import './style.scss';
 //====================================================================================================================//
@@ -16,11 +17,20 @@ function LoginPage() {
     });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const fieldValue = e.target.value;
+        const fieldName = e.target.id;
+        let newFieldValue = e.target.value;
+
+
+        if (fieldName === INPUT_FIELDS.PHONE_NUMBER) {
+            const currPhoneValue = formValues[INPUT_FIELDS.PHONE_NUMBER];
+            // @ts-ignore
+            newFieldValue = phoneNumberFormatter(currPhoneValue, newFieldValue);
+        }
+        // console.log('fieldValue', newFieldValue)
         // @ts-ignore
         setFormValues({
             ...formValues,
-            [e.target.id]: fieldValue
+            [fieldName]: newFieldValue
         })
     };
 
@@ -29,7 +39,7 @@ function LoginPage() {
     };
 
 
-    console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues)
+    // console.log('FOR ALLBIRDS EVALUATOR\n===============================\nCurrent login form value state:\n', formValues);
 
     return (
         <div className="login-page">
@@ -41,7 +51,7 @@ function LoginPage() {
                 {loginInputFields.map(field => (
                     <div className="form-field" id={field.name + "-input"} key={field.name}>
                         <label htmlFor={field.name}>
-                            {field.label.toUpperCase()}
+                            {field.label.toUpperCase() + (field.required ? " *" : "")}
                         </label>
                         <input
                             type={field.type || "text"}
@@ -49,6 +59,7 @@ function LoginPage() {
                             name={field.name}
                             id={field.name}
                             autoComplete={field.autoComplete || ""}
+                            placeholder={field.placeholder || ""}
                             value={formValues[field.name]}
                             onChange={handleOnChange}
                         />
