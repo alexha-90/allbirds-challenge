@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
+import { loginInputFields, INPUT_FIELDS } from "./fields";
+import { DEFAULT_MAX_FIELD_LENGTH } from "../../constants";
 import './style.scss';
 //====================================================================================================================//
 
-const INPUT_FIELDS = {
-    FIRST_NAME: "firstName",
-    LAST_NAME: "lastName",
-    PHONE_NUMBER: "phoneNumber",
-    EMAIL_ADDRESS: "emailAddress",
-    PASSWORD: "password",
-    PASSWORD_CONFIRMATION: "passwordConfirmation"
-};
 
 function LoginPage() {
-
     const [formValues, setFormValues] = useState({
         [INPUT_FIELDS.FIRST_NAME]: "",
         [INPUT_FIELDS.LAST_NAME]: "",
@@ -23,20 +16,12 @@ function LoginPage() {
     });
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.id);
-        console.log(e.target.value);
-        // setFormValues({
-        //     [INPUT_FIELDS.FIRST_NAME]: ""
-        // });
-        // setFormValues({
-        //     ...formValues,
-        //     [e.target.id]: [e.target.value]
-        // })
-
-
+        // @ts-ignore
+        setFormValues({
+            ...formValues,
+            [e.target.id]: [e.target.value]
+        })
     };
-
-
 
     return (
         <div className="login-page">
@@ -44,39 +29,27 @@ function LoginPage() {
             <p>
                 Registering makes checkout fast and easy and saves your order information in your account.
             </p>
-            <div className="form-wrapper">
-                <form>
-                    <label>
-                        FIRST NAME
+            <form>
+                {loginInputFields.map(field => (
+                    <div className="form-field" id={field.name + "-input"}>
+                        <label htmlFor={field.name}>
+                            {field.label.toUpperCase()}
+                        </label>
                         <input
-                            type="text"
-                            maxLength={50}
-                            id={INPUT_FIELDS.FIRST_NAME}
-                            autoComplete="given-name"
-                            value={formValues[INPUT_FIELDS.FIRST_NAME]}
+                            type={field.type || "text"}
+                            maxLength={field.maxLength || DEFAULT_MAX_FIELD_LENGTH}
+                            name={field.name}
+                            id={field.name}
+                            autoComplete={field.autoComplete || ""}
+                            value={formValues[field.name]}
                             onChange={handleOnChange}
                         />
-                    </label>
-
-
-                    {/*<input type="submit" value="REGISTER" />*/}
-                </form>
-            </div>
+                    </div>
+                ))}
+                {/*<input type="submit" value="REGISTER" />*/}
+            </form>
         </div>
     );
 }
 
 export default LoginPage;
-
-
-/*
-                        <input
-                            name="email"
-                            type="email"
-                            id="}
-                            maxLength={50}
-                            autoComplete="given-name"
-                            value={""}
-                            onChange={handleOnChange}
-                        />
- */

@@ -16,18 +16,20 @@
     font-weight: $light;
   }
 
-  label {
-    display: block;
-    //background-color: green;
-    //margin-bottom: $spacing-md;
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    label {
+      width: 100%;
+      margin: $spacing-md 0 $spacing-sm 0;
+    }
+    input {
+      display: block;
+      height: $size-xl;
+      padding: $spacing-xsm $spacing-sm;
+    }
   }
 
-  input {
-    margin-top: $spacing-xsm;
-    display: block;
-    width: 100%;
-    height: $size-xl;
-    padding: $spacing-xsm;
-  }
+
 
 }
